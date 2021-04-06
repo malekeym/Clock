@@ -6,7 +6,7 @@ gradient.addColorStop(0.1, "#2d3436");
 gradient.addColorStop(0.2, "#ffb142");
 // gradient.addColorStop(0.25, "#84817a");
 
-function start() {
+function drawClock() {
   ctx.fillStyle = gradient;
   ctx.fillRect(-250, -250, 500, 500);
   let radius = 250 * 0.9;
@@ -50,10 +50,10 @@ function drawHand(ctx, pos, length, width) {
   ctx.rotate(-pos);
 }
 
-function end() {
+function startTime() {
   setInterval(() => {
-    start();
+    drawClock();
     drawTime(ctx, 150);
   }, 1000);
 }
-end()
+export default startTime;
