@@ -4,8 +4,6 @@ ctx.translate(250, 250);
 var gradient = ctx.createRadialGradient(0, 0, 150, 0, 0, 500);
 gradient.addColorStop(0.1, "#2d3436");
 gradient.addColorStop(0.2, "#ffb142");
-// gradient.addColorStop(0.25, "#84817a");
-
 function drawClock() {
   ctx.fillStyle = gradient;
   ctx.fillRect(-250, -250, 500, 500);
@@ -49,11 +47,18 @@ function drawHand(ctx, pos, length, width) {
   ctx.stroke();
   ctx.rotate(-pos);
 }
-
-function startTime() {
-  setInterval(() => {
-    drawClock();
-    drawTime(ctx, 150);
-  }, 1000);
+function clockHandler(){
+  console.log("running")
+  function startTime() {
+    setInterval(() => {
+      drawClock();
+      drawTime(ctx, 150);
+    }, 1000);
+  }
+  return(
+    <div>
+      <button onClick={startTime} >start clock</button>
+    </div>
+  )
 }
-export default startTime;
+export default clockHandler;
