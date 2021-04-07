@@ -9,7 +9,12 @@ function initialClock(){
   var gradient = ctx.createRadialGradient(0, 0, radius, 0, 0, height*2);
   gradient.addColorStop(0.2, "#2d343600");
   gradient.addColorStop(0.1, "#ffb142");
-  function drawClock(ctx) {
+  ctx.beginPath();
+  ctx.arc(0, 0, height*.9, 0, 2 * Math.PI);
+  ctx.lineWidth = 10
+  ctx.strokeStyle = "#8395a7";
+  ctx.stroke();
+  function drawClock() {
     ctx.fillStyle = gradient;
     ctx.fillRect(-height, -height, height*2, height*2);
     ctx.fillStyle = "#130f40";
@@ -22,25 +27,25 @@ function initialClock(){
       ctx.rotate((-30 * Math.PI) / 180);
     }
   }
-  function drawTime(ctx, radius) {
+  function drawTime(radius) {
     let now = new Date();
     let hour = now.getHours();
     let minute = now.getMinutes();
     let second = now.getSeconds();
     hour = hour % 12;
     hour = (hour * Math.PI) / 6 + (minute * Math.PI) / (6 * 60);
-    drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+    drawHand(hour, radius * 0.5, radius * 0.07);
     minute = minute * (Math.PI / 30);
-    drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+    drawHand(minute, radius * 0.8, radius * 0.07);
     second = second * (Math.PI / 30);
-    drawHand(ctx, second, radius * 0.9, radius * 0.02);
+    drawHand(second, radius * 0.9, radius * 0.02);
     ctx.beginPath();
     ctx.arc(0, 0, 12.5, 0, 2 * Math.PI);
     ctx.fillStyle = "#2C5364";
     ctx.fill();
   }
   
-  function drawHand(ctx, pos, length, width) {
+  function drawHand(pos, length, width) {
     ctx.beginPath();
     ctx.lineWidth = width;
     ctx.lineCap = "round";
@@ -51,15 +56,15 @@ function initialClock(){
     ctx.stroke();
     ctx.rotate(-pos);
   }
-  return {drawClock, drawTime, ctx}
+  return {drawClock, drawTime}
 }
 
 function clockHandler(){
   function startTime() {
-    const {drawClock,drawTime, ctx} = initialClock()
+    const {drawClock,drawTime} = initialClock()
     setInterval(() => {
-      drawClock(ctx);
-      drawTime(ctx, 150);
+      drawClock();
+      drawTime(150);
     }, 1000);
   }
   return(
