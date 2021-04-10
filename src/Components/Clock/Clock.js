@@ -1,22 +1,23 @@
-import "./Clock.css"
-function initialClock(){
+import "./Clock.css";
+import React, {useEffect} from 'react';
+function initialClock() {
   var canvas = document.querySelector("#canvasClock");
   var ctx = canvas.getContext("2d");
-  const height = 480/2;
-  console.log(height)
+  const height = 480 / 2;
+  console.log(height);
   ctx.translate(height, height);
   let radius = height * 0.6;
-  var gradient = ctx.createRadialGradient(0, 0, radius, 0, 0, height*2);
+  var gradient = ctx.createRadialGradient(0, 0, radius, 0, 0, height * 2);
   gradient.addColorStop(0.2, "#2d343600");
   gradient.addColorStop(0.1, "#ffb142");
   ctx.beginPath();
-  ctx.arc(0, 0, height*.9, 0, 2 * Math.PI);
-  ctx.lineWidth = 10
+  ctx.arc(0, 0, height * 0.9, 0, 2 * Math.PI);
+  ctx.lineWidth = 10;
   ctx.strokeStyle = "#8395a7";
   ctx.stroke();
   function drawClock() {
     ctx.fillStyle = gradient;
-    ctx.fillRect(-height, -height, height*2, height*2);
+    ctx.fillRect(-height, -height, height * 2, height * 2);
     ctx.fillStyle = "#130f40";
     ctx.font = "30px Arial";
     ctx.font = radius * 0.15 + "px Vazir";
@@ -44,7 +45,7 @@ function initialClock(){
     ctx.fillStyle = "#2C5364";
     ctx.fill();
   }
-  
+
   function drawHand(pos, length, width) {
     ctx.beginPath();
     ctx.lineWidth = width;
@@ -56,22 +57,26 @@ function initialClock(){
     ctx.stroke();
     ctx.rotate(-pos);
   }
-  return {drawClock, drawTime}
+  return { drawClock, drawTime };
 }
 
-function clockHandler(){
+function ClockHandler() {
   function startTime() {
-    const {drawClock,drawTime} = initialClock()
+    const { drawClock, drawTime } = initialClock();
     setInterval(() => {
       drawClock();
       drawTime(150);
     }, 1000);
   }
-  return(
+  useEffect(() => {
+    startTime()
+  },[])
+  return (
     <div id="Clock">
-      <canvas id="canvasClock" width="500" height="500"></canvas>
-      <button className="ui yellow button"onClick={startTime} >start clock</button>
+      {
+      <canvas id="canvasClock" width="500" height="500"></canvas>                     
+      }
     </div>
-  )
+  );
 }
-export default clockHandler;
+export default ClockHandler;
