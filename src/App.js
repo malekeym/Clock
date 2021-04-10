@@ -7,7 +7,7 @@ function App() {
   const [clockState, setClockState] = useState("Clock");
   return (
     <div className="App">
-      <Nav setShow={setClockState}/>
+      <Nav setShow={setClockState} show={clockState}/>
       {clockState==="Clock"?<ClockHandler/>:null}
       {clockState==="Timer"?<Timer />:null}
     </div>

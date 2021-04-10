@@ -23,7 +23,7 @@
     "predeploy": "yarn build",
     "deploy": "gh-pages -d build",
     "format": "prettier \"src/**/*.{js, html}\" --write",
-      "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
+    "lint": "eslint \"src/**/*.{js,jsx}\" --quiet"
   },
   "eslintConfig": {
     "extends": [
