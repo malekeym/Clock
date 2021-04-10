@@ -5,9 +5,14 @@ import './Timer.css'
 function Timer() {
     const [timer, setTimer] = useState({hour:0, minute:2, second:30})
     const [show, setShow] = useState(false)
+    let timeCounter;
+
+
     function isEnd(){
         return (timer.second===0 && timer.minute===0 && timer.hour===0);
     }
+
+
     function dec(){
         if(timer.second!==0){
             setTimer(prevState => {
@@ -33,15 +38,21 @@ function Timer() {
             })
         }
     }
+
     function reset(e){
         setTimer({hour:0, minute:2, second:30})
         setShow(false)
     }
+
     useEffect(()=>{
         if(show && !isEnd()){
-            let timer = setTimeout(()=>dec(),1000)
+            timeCounter = setTimeout(()=>dec(),1000)
+        }
+        return () => {
+            clearInterval(timeCounter)
         }
     },[timer, show])
+
     function changeHandler(e){
         let val = +e.target.value;
         if( val === ""){
@@ -50,10 +61,11 @@ function Timer() {
         setTimer(prevState => {
             prevState[e.target.id] = val;
             let newState = {...prevState}
-            console.log(newState)
             return newState
             });
     }
+
+
     return(
         <div className="timer">
             {show ? <Showtime timer = {timer} isEnd={isEnd}/> : <Inputs timer={timer} changeHandler={changeHandler}/>}
@@ -65,4 +77,5 @@ function Timer() {
         </div>
     )
 }
+
 export default Timer;

@@ -19,8 +19,10 @@ function Timer (props) {
 
     useEffect(()=>{
         resume()
-        console.log(count)
+        // return pause()
     },[count])
+
+
     return(
         <div className="container">
             <div className='stopwatch'>{count}</div>
@@ -28,4 +30,6 @@ function Timer (props) {
         </div>
     )
 }
+
+
 export default Timer;

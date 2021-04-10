@@ -1,0 +1,25 @@
+.max{
+    position:absolute;
+    bottom: 20px;
+    left: 20px;
+    height: 5vh;
+    width: 20vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 5px;
+    color: #bdc3c7;
+    background-color: #34495e;
+    z-index: 2;
+}
+.progressBar{
+    position: absolute;
+    left: 2px;
+    bottom: 0px;
+    height: 5px;
+    background-color: #bdc3c7;
+}
+.content{
+    align-self: center;
+}
