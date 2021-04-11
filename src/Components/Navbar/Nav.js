@@ -1,8 +1,15 @@
-import React from 'react';
+import React, {useContext} from 'react';
+import Themecontext from '../../Themecontext'
 import "./Nav.css";
 function Nav({setShow, show}) {
+  const [theme,setTheme] = useContext(Themecontext)
+
+  function themeHandler() {
+     return((theme==="" && "inverted") || (theme==="inverted" && ""))
+  }
+
   return (
-    <div id="nav" className="ui inverted menu secondary vertical pointing menu">
+    <div id="nav" className={`ui menu secondary ${theme} vertical pointing menu`}>
       <a className={`${show==="Clock" && "active"} item`} onClick={()=>setShow("Clock")}>
         <i className="clock icon"></i>
         Clock
@@ -15,6 +22,7 @@ function Nav({setShow, show}) {
         <i className="stopwatch icon"></i>
         Stopwatch
       </a>
+      <button className={`ui ${theme} item button`} onClick={()=>setTheme(themeHandler())}>changeHandler</button>
     </div>
   );
 }
