@@ -1,11 +1,11 @@
-import React, {useEffect, useState} from 'react'
+import React, {useEffect, useState, useRef} from 'react'
 import Inputs from './Inputs'
 import Showtime from './Showtime'
 import './Timer.css'
 function Timer() {
     const [timer, setTimer] = useState({hour:0, minute:2, second:30})
     const [show, setShow] = useState(false)
-    let timeCounter;
+    let timeRef = useRef();
 
 
     function isEnd(){
@@ -14,6 +14,10 @@ function Timer() {
 
 
     function dec(){
+        console.log("I am still run!!!")
+        if(!show){
+            clearInterval(timeRef.current)
+        }
         if(timer.second!==0){
             setTimer(prevState => {
                 let newState = {...prevState}
@@ -46,10 +50,11 @@ function Timer() {
 
     useEffect(()=>{
         if(show && !isEnd()){
-            timeCounter = setTimeout(()=>dec(),1000)
+            let timeCounter = setInterval(()=>dec(),1000)
+            timeRef.current = timeCounter
         }
         return () => {
-            clearInterval(timeCounter)
+            clearInterval(timeRef.current)
         }
     },[timer, show])
 
@@ -58,9 +63,9 @@ function Timer() {
         if( val === ""){
             val = 0;
         }
-        setTimer(prevState => {
-            prevState[e.target.id] = val;
-            let newState = {...prevState}
+        setTimer(currentState => {
+            currentState[e.target.id] = val;
+            let newState = {...currentState}
             return newState
             });
     }

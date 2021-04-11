@@ -3,7 +3,6 @@ import Themecontext from '../../Themecontext'
 
 function Buttons({resume, pause, stop}) {
     const [theme] = useContext(Themecontext)
-    console.log(theme)
     return(
         <div id="Button-group" className="ui buttons">
             <button className= {`ui ${theme} blue basic labeled icon button`} onClick={()=>stop()}><i className="redo icon"></i>Reset</button>

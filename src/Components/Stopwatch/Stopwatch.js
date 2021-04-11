@@ -1,8 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import Buttons from './Buttons';
 import './Stopwatch.css'
 function Timer (props) {
-    var timer;
+    var timerRef = useRef();
     const [count, setCount] = useState(0)
     const [status, setStatus] = useState(true)
 
@@ -10,25 +10,28 @@ function Timer (props) {
         if(!status){
             setStatus(true)
         }
-        clearInterval(timer)
-        timer = setInterval(()=>setCount(count+1),1000)
+        clearInterval(timerRef.current)
+        let timerId = setInterval(()=>{
+            console.log("I am still running!")        
+            setCount(count+1)},1000)
+        timerRef.current = timerId
     }
 
     function stop(){
         setStatus(false)
         setCount(0)
-        clearInterval(timer)
+        clearInterval(timerRef.current)
     }
 
     function pause(){
-        clearInterval(timer)
+        clearInterval(timerRef.current)
     }
 
     useEffect(()=>{
         if(status){
             resume()
         }
-        return () => clearInterval(timer)
+        return () => clearInterval(timerRef.current)
     },[count])
 
 

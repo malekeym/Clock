@@ -1,5 +1,5 @@
+import React, {useEffect, useRef} from 'react';
 import "./Clock.css";
-import React, {useEffect} from 'react';
 function initialClock() {
 
   var canvas = document.querySelector("#canvasClock");
@@ -65,24 +65,24 @@ function initialClock() {
 
 function ClockHandler() {
 
-  function startTime() {
+  const intervalRef = useRef();
+
+  useEffect(() => {
     const { drawClock, drawTime } = initialClock();
-    setInterval(() => {
+
+    const timeId = setInterval(() => {
       drawClock();
       drawTime(150);
     }, 1000);
-  }
 
-  useEffect(() => {
-    startTime()
-  },[])
+    intervalRef.current = timeId;
 
+    return () => { clearInterval(intervalRef.current)};
+  },[]);
 
   return (
     <div id="Clock">
-      {
-      <canvas id="canvasClock" width="500" height="500"></canvas>                     
-      }
+      <canvas id="canvasClock" width="500" height="500"></canvas>
     </div>
   );
 
