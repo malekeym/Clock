@@ -4,22 +4,31 @@ import './Stopwatch.css'
 function Timer (props) {
     var timer;
     const [count, setCount] = useState(0)
+    const [status, setStatus] = useState(true)
 
     function resume(){
-        clearTimeout(timer)
-        timer = setTimeout(()=>setCount(count+1),1000)
+        if(!status){
+            setStatus(true)
+        }
+        clearInterval(timer)
+        timer = setInterval(()=>setCount(count+1),1000)
     }
+
     function stop(){
-        clearTimeout(timer)
+        setStatus(false)
         setCount(0)
+        clearInterval(timer)
     }
+
     function pause(){
-        clearTimeout(timer)
+        clearInterval(timer)
     }
 
     useEffect(()=>{
-        resume()
-        // return pause()
+        if(status){
+            resume()
+        }
+        return () => clearInterval(timer)
     },[count])
 
 
