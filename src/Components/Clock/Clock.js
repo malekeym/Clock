@@ -1,6 +1,7 @@
 import "./Clock.css";
 import React, {useEffect} from 'react';
 function initialClock() {
+
   var canvas = document.querySelector("#canvasClock");
   var ctx = canvas.getContext("2d");
   const height = 480 / 2;
@@ -15,6 +16,7 @@ function initialClock() {
   ctx.lineWidth = 10;
   ctx.strokeStyle = "#8395a7";
   ctx.stroke();
+
   function drawClock() {
     ctx.fillStyle = gradient;
     ctx.fillRect(-height, -height, height * 2, height * 2);
@@ -28,6 +30,7 @@ function initialClock() {
       ctx.rotate((-30 * Math.PI) / 180);
     }
   }
+
   function drawTime(radius) {
     let now = new Date();
     let hour = now.getHours();
@@ -61,6 +64,7 @@ function initialClock() {
 }
 
 function ClockHandler() {
+
   function startTime() {
     const { drawClock, drawTime } = initialClock();
     setInterval(() => {
@@ -68,9 +72,12 @@ function ClockHandler() {
       drawTime(150);
     }, 1000);
   }
+
   useEffect(() => {
     startTime()
   },[])
+
+
   return (
     <div id="Clock">
       {
@@ -78,5 +85,7 @@ function ClockHandler() {
       }
     </div>
   );
+
 }
+
 export default ClockHandler;

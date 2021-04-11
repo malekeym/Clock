@@ -22,6 +22,7 @@ function Notification (props) {
             <span style={progStyle} className="progressBar"></span>
         </div>
     )
+    
 }
 
 

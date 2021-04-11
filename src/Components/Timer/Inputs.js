@@ -2,6 +2,7 @@ import React from 'react'
 import './Timer.css'
 function Inputs({changeHandler, timer}) {
     let {hour, minute, second} = timer
+
     return(
         <div className="group">
             <div className="timer inp">
@@ -18,5 +19,7 @@ function Inputs({changeHandler, timer}) {
             </div>
         </div>
     )
+    
 }
+
 export default Inputs;

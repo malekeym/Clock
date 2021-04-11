@@ -1,7 +1,9 @@
 import React from 'react'
 import Timecontainer from './Timecontainer'
 import Notification from "../Notification/Notification"
+
 function Showtime({timer, isEnd}){
+
     return (
         <div className="ui grid">
             {
@@ -9,5 +11,6 @@ function Showtime({timer, isEnd}){
             }
         </div>
     )
+    
 }
 export default Showtime

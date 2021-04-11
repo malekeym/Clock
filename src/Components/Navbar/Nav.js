@@ -1,3 +1,4 @@
+import React from 'react';
 import "./Nav.css";
 function Nav({setShow, show}) {
   return (
@@ -17,4 +18,5 @@ function Nav({setShow, show}) {
     </div>
   );
 }
+
 export default Nav;

@@ -1,6 +1,8 @@
 import React from 'react'
 function Timecontainer({timer}){
+
     let {hour, minute, second} = timer
+
     return (
         <div className="row">
             <div className="element">{hour}</div>
@@ -8,5 +10,7 @@ function Timecontainer({timer}){
             <div className="element">{second}</div>
         </div>
     )
+
 }
+
 export default Timecontainer;
