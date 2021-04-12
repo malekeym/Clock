@@ -24,7 +24,7 @@ function Nav({setShow, show}) {
         <div>
           <h3>Do You really want to logout?</h3>
           <div className="ui buttons">
-            <button className="ui button positive"onClick={()=>{setShowModal(false);setAuth(false)}}>Yes</button>
+            <button className="ui button positive"onClick={()=>{setShowAuth(true);localStorage.removeItem("name");setShowModal(false);setAuth(false)}}>Yes</button>
             <div className="or" />
             <button className="ui button red"onClick={()=>{setShowModal(false)}}>No</button>
           </div>
@@ -44,7 +44,10 @@ function Nav({setShow, show}) {
           Stopwatch
         </a>
         <button className={`ui ${theme} item button`} onClick={()=>setTheme(themeHandler())}>changeHandler</button>
-        <button className={`ui ${buttonColor()} Login button`} onClick={() => isAuth?setShowModal(true):null}>{isAuth?"Log Out":"Log in"}</button>
+        <div className="Login">
+          {isAuth?<span className="ui teal label">{`${localStorage.getItem('name')}`}</span>:null}
+          <button className={`ui detail ${buttonColor()} button`} onClick={() => isAuth?setShowModal(true):null}>{isAuth?"Log Out":"Log in"}</button>
+        </div>
       </div>)
   );
 }

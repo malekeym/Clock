@@ -26,6 +26,9 @@ function Authentication({isAuthHook}) {
         let data = await fetch("https://jsonplaceholder.typicode.com/users").then(res=>res.json())
         let user = data.find((item)=> item.email===userInfo.Email && item.phone===userInfo.Password)
         setShowNotif(true)
+        if(user!==undefined){
+            localStorage.setItem("name", user.name)
+        }
         setUserInfo({Email:"", Password:""})
         setAuthHandle(user!==undefined)
         let timeId = setTimeout(()=>{setAuth(user!==undefined);setShowNotif(false)},1500)

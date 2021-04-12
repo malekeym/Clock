@@ -9,7 +9,7 @@ import "./App.css";
 function App() {
   const [clockState, setClockState] = useState("Clock");
   const themeHook = useState("inverted")
-  const isAuthHook = useState(false)
+  const isAuthHook = useState(Boolean(localStorage.getItem("name")))
   const [showAuth, setShowAuth] = useState(!isAuthHook[0])
   return (
     <div className={`App ${themeHook[0]}`}>
