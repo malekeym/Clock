@@ -1,24 +1,22 @@
-import React, {useState, useContext} from 'react'
-import ClockHandler from "./Components/Clock/Clock";
-import Nav from "./Components/Navbar/Nav";
-import Stopwatch from './Components/Stopwatch/Stopwatch'
-import Timer from './Components/Timer/Timer'
+import React, {useState} from 'react'
 import Themecontext from './Themecontext'
+import Nav from "./Components/Navbar/Nav";
+import AppContainer from './Components'
+import Authentication from './Components/Authentication';
 import "./App.css";
 
 
 function App() {
-  
-  const themeHook = useState("inverted")
   const [clockState, setClockState] = useState("Clock");
-
+  const themeHook = useState("inverted")
+  const isAuthHook = useState(false)
+  const [showAuth, setShowAuth] = useState(!isAuthHook[0])
   return (
     <div className={`App ${themeHook[0]}`}>
-      <Themecontext.Provider value={themeHook}>
+      <Themecontext.Provider value={[...themeHook, showAuth, setShowAuth, ...isAuthHook]}>
         <Nav setShow={setClockState} show={clockState}/>
-        {clockState==="Clock"?<ClockHandler/>:null}
-        {clockState==="Timer"?<Timer />:null}
-        {clockState==="Stopwatch"?<Stopwatch />:null}
+        {(!isAuthHook[0])&&showAuth ? <Authentication isAuthHook={isAuthHook} />
+                                    : <AppContainer clockState={clockState}/>}
       </Themecontext.Provider>
     </div>
   );
